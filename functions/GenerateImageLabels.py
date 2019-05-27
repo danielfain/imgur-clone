@@ -4,8 +4,8 @@ import json
 
 rekognition = boto3.client("rekognition", "us-east-1")
 
-max_labels = 6
-min_confidence = 70
+max_labels = 3
+min_confidence = 80
 
 def lambda_handler(event, context):
     response = rekognition.detect_labels(
