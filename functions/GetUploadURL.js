@@ -3,8 +3,8 @@ const AWS = require('aws-sdk');
 exports.handler = async (event) => {
     var s3 = new AWS.S3();
     
-    var key = event.key;
-    var type = event.type;
+    var key = event.queryStringParameters.key;
+    var type = event.queryStringParameters.type;
     
     var s3Params = {
       Bucket: 'danielfain',
