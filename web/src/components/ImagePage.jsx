@@ -9,7 +9,7 @@ const ImagePage = (props) => {
 
     return (
       <React.Fragment>
-        <Image src={url} size="massive" />
+        <Image src={url} size="massive" rounded />
         <div style={{ paddingTop: '1vw' }}>
           {labels.map(label => (
             <Button>{label}</Button>

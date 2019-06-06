@@ -8,16 +8,16 @@ const ImageCard = (props) => {
   } = props;
 
   return (
-    <Link to={{ pathname: `/image/${id}`, state: { url, labels } }}>
-      <Card href={`/image/${id}`}>
+    <Card href="/" color="blue">
+      <Link to={{ pathname: `/image/${id}`, state: { url, labels } }}>
         <Image src={url} />
-        <Card.Content extra textAlign="center">
-          {labels.map((label, index) => (
-            <Button key={index} size="mini">{label}</Button>
-          ))}
-        </Card.Content>
-      </Card>
-    </Link>
+      </Link>
+      <Card.Content extra textAlign="center">
+        {labels.map((label, index) => (
+          <Button key={index} size="mini">{label}</Button>
+        ))}
+      </Card.Content>
+    </Card>
   );
 };
 
