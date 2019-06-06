@@ -7,7 +7,7 @@ exports.handler = async (event) => {
     var type = event.queryStringParameters.type;
     
     var s3Params = {
-      Bucket: 'danielfain',
+      Bucket: 'imgurclone',
       Key:  key,
       ContentType: type,
       Expires: 3600,
