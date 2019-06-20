@@ -3,6 +3,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 
 import ImagePage from './ImagePage';
 import Home from './Home';
+import UploadPage from './UploadPage';
 
 const App = () => (
   <Switch>
@@ -14,6 +15,7 @@ const App = () => (
       </Link>
       <Route exact path="/" component={Home} />
       <Route path="/image/:id" component={ImagePage} />
+      <Route path="/upload" component={UploadPage} />
     </div>
   </Switch>
 );
