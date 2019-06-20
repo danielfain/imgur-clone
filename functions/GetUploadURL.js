@@ -4,12 +4,10 @@ exports.handler = async (event) => {
     var s3 = new AWS.S3();
     
     var key = event.queryStringParameters.key;
-    var type = event.queryStringParameters.type;
     
     var s3Params = {
       Bucket: 'imgurclone',
       Key:  key,
-      ContentType: type,
       Expires: 3600,
       ACL: 'public-read'
     };
