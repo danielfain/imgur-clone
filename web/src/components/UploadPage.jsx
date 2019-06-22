@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 
-const API_URL = 'https://so68k4vqqh.execute-api.us-east-1.amazonaws.com/default/GetUploadURL';
+const API_URL = process.env.GET_PRESIGNED_URL_API;
 
 const UploadPage = () => {
   const onDrop = useCallback((acceptedFiles) => {
