@@ -2,7 +2,7 @@ import React from 'react';
 
 import ImageCard from './ImageCard';
 
-const Home = (props) => {
+const Home = () => {
   return (
     <div>
       <ImageCard id="ada41f" labels={['Dog', 'Cute']} url="https://imgurclone.s3.amazonaws.com/photo-1518791841217-8f162f1e1131.jpg" />
