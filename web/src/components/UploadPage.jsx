@@ -22,15 +22,13 @@ const UploadPage = () => {
       const imageBase64 = reader.result.split(',').pop();
       const imageBuffer = Buffer.from(imageBase64, 'base64');
 
-      let signedUrl = '';
-
-      signedUrl = await axios.get(`${API_URL}?key=${acceptedFiles[0].name}&type=${acceptedFiles[0].type}`)
+      const signedUrl = await axios.get(`${API_URL}?key=${acceptedFiles[0].name}&type=${acceptedFiles[0].type}`)
         .then(response => (response.data.uploadURL))
         .catch((error) => {
           console.error(error);
         });
 
-      if (signedUrl !== '') {
+      if (signedUrl) {
         await axios.put(signedUrl, imageBuffer, { headers: { 'Content-Encoding': 'base64', 'Content-Type': acceptedFiles[0].type } })
           .then((response) => {
             console.log(response);
