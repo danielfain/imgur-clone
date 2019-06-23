@@ -4,7 +4,9 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_GET_PRESIGNED_URL_API;
 
-const UploadPage = () => {
+const UploadPage = (props) => {
+  const { onImageUpload } = props;
+
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles[0].type.substring(0, 5) !== 'image') {
       console.error('only upload images, yo');
@@ -32,9 +34,11 @@ const UploadPage = () => {
         await axios.put(signedUrl, imageBuffer, { headers: { 'Content-Encoding': 'base64', 'Content-Type': acceptedFiles[0].type } })
           .then((response) => {
             console.log(response);
+            onImageUpload(true);
           })
           .catch((error) => {
             console.error(error);
+            onImageUpload(false);
           });
       }
     };
@@ -48,8 +52,8 @@ const UploadPage = () => {
       <input {...getInputProps()} />
       {
         isDragActive
-          ? <p>Drop the files here ...</p>
-          : <p>Drag 'n' drop some files here, or click to select files</p>
+          ? <p>Drop an image here...</p>
+          : <p>Drag and drop an image here, or click to select image</p>
       }
     </div>
   );

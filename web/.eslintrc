@@ -6,6 +6,7 @@
         "react/prop-types": "off",
         "react/no-array-index-key": "off",
         "object-curly-newline": "off",
-        "react/destructuring-assignment": "off"
+        "react/destructuring-assignment": "off",
+        "max-len":"off"
     }
 }
