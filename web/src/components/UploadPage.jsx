@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
+import crypto from 'crypto';
 
 const API_URL = process.env.REACT_APP_GET_PRESIGNED_URL_API;
 
@@ -18,13 +19,16 @@ const UploadPage = (props) => {
       return;
     }
 
+    const key = `${crypto.randomBytes(4).toString('hex')}.${acceptedFiles[0].name.split('.').pop()}`;
+
     const reader = new FileReader();
 
+    reader.onerror = () => (console.log('error'));
     reader.onload = async () => {
       const imageBase64 = reader.result.split(',').pop();
       const imageBuffer = Buffer.from(imageBase64, 'base64');
 
-      const signedUrl = await axios.get(`${API_URL}?key=${acceptedFiles[0].name}&type=${acceptedFiles[0].type}`)
+      const signedUrl = await axios.get(`${API_URL}?key=${key}&type=${acceptedFiles[0].type}`)
         .then(response => (response.data.uploadURL))
         .catch((error) => {
           console.error(error);
@@ -32,18 +36,20 @@ const UploadPage = (props) => {
 
       if (signedUrl) {
         await axios.put(signedUrl, imageBuffer, { headers: { 'Content-Encoding': 'base64', 'Content-Type': acceptedFiles[0].type } })
-          .then((response) => {
-            console.log(response);
+          .then(() => {
             onImageUpload(true);
           })
-          .catch((error) => {
-            console.error(error);
+          .catch(() => {
             onImageUpload(false);
           });
       }
     };
 
-    acceptedFiles.forEach(file => reader.readAsDataURL(file));
+    acceptedFiles.forEach((file) => {
+      // creates a replica of the image with randomized name
+      const imageFile = new File([file], key, { type: file.type });
+      reader.readAsDataURL(imageFile);
+    });
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
