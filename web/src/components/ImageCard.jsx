@@ -1,15 +1,17 @@
 import React from 'react';
 import { Card, Button, Image } from 'semantic-ui-react';
 
+const S3_URL = process.env.REACT_APP_S3_URL;
+
 const ImageCard = (props) => {
   const {
-    id, url, labels,
+    imageKey, labels,
   } = props;
 
   return (
-    <div style={{ display: 'flex' }}>
-      <Card href={`/image/${id}`} color="blue">
-        <Image src={url} />
+    <div style={{ display: 'flex', paddingBottom: '2vw' }}>
+      <Card href={`/image/${imageKey}`} color="blue">
+        <Image src={S3_URL + imageKey} />
         <Card.Content extra textAlign="center">
           {labels.map((label, index) => (
             <Button key={index} size="mini">{label}</Button>
