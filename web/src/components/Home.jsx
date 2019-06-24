@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
 
 import ImageCard from './ImageCard';
 
-const Home = () => {
-  return (
-    <div>
-      <ImageCard id="60b4a006.jpg" labels={['Dog', 'Cute']} url="https://imgurclone.s3.amazonaws.com/60b4a006.jpg" />
-    </div>
-  );
-};
+const IMAGE_LIMIT = 20;
+
+class Home extends Component {
+  constructor() {
+    super();
+    this.state = {
+      images: [],
+    };
+  }
+
+  componentDidMount() {
+    console.log('ye');
+  }
+
+  render() {
+    return (
+      <p>home for now</p>
+    );
+  }
+}
 
 export default Home;

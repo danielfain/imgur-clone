@@ -15,7 +15,7 @@ class ImagePage extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { id } = this.props.match.params;
 
     axios.get(SINGLE_API + id)
