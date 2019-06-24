@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Button } from 'semantic-ui-react';
+import { Image, Button, Loader, Dimmer } from 'semantic-ui-react';
 import axios from 'axios';
 
 const S3_URL = process.env.REACT_APP_S3_URL;
@@ -30,7 +30,11 @@ class ImagePage extends Component {
     return (
       <React.Fragment>
         {this.state.loading
-          ? <p>Loading...</p>
+          ? (
+            <Dimmer active inverted>
+              <Loader>Loading</Loader>
+            </Dimmer>
+          )
           : (
             <React.Fragment>
               <Image src={this.state.url} size="massive" rounded />
