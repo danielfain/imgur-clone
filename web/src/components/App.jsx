@@ -4,15 +4,17 @@ import { Route, Switch } from 'react-router-dom';
 import ImagePage from './ImagePage';
 import Home from './Home';
 import Header from './Header';
+import Page404 from './Page404';
 
 const App = () => (
-  <Switch>
-    <div style={{ paddingLeft: '7vw', paddingRight: '7vw', paddingTop: '2vw', paddingBottom: '2vw' }}>
-      <Header />
+  <React.Fragment>
+    <Header />
+    <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/image/:id" component={ImagePage} />
-    </div>
-  </Switch>
+      <Route exact path="/image/:id" component={ImagePage} />
+      <Route component={Page404} />
+    </Switch>
+  </React.Fragment>
 );
 
 export default App;

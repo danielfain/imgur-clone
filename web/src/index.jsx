@@ -7,7 +7,9 @@ import App from './components/App';
 
 ReactDOM.render(
   <Router>
-    <App />
+    <div style={{ paddingLeft: '7vw', paddingRight: '7vw', paddingTop: '2vw', paddingBottom: '2vw' }}>
+      <App />
+    </div>
   </Router>,
   document.getElementById('root'),
 );

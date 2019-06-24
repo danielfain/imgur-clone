@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Button, Image } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 
 const ImageCard = (props) => {
   const {
@@ -8,16 +7,16 @@ const ImageCard = (props) => {
   } = props;
 
   return (
-    <Card href="/" color="blue">
-      <Link to={{ pathname: `/image/${id}`, state: { url, labels } }}>
+    <div style={{ display: 'flex' }}>
+      <Card href={`/image/${id}`} color="blue">
         <Image src={url} />
-      </Link>
-      <Card.Content extra textAlign="center">
-        {labels.map((label, index) => (
-          <Button key={index} size="mini">{label}</Button>
-        ))}
-      </Card.Content>
-    </Card>
+        <Card.Content extra textAlign="center">
+          {labels.map((label, index) => (
+            <Button key={index} size="mini">{label}</Button>
+          ))}
+        </Card.Content>
+      </Card>
+    </div>
   );
 };
 
