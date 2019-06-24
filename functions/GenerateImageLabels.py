@@ -28,13 +28,11 @@ def lambda_handler(event, context):
     for label in response["Labels"]:
         labels.append(label["Name"])
     
-    key = uuid.uuid4().hex
     table = dynamo.Table("imgur_clone_images")
 
     table.put_item(
         Item = {
-            "key": key,
-            "image_key": image_key,
+            "key": image_key,
             "labels": labels
         }
     )
