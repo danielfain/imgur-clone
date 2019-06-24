@@ -4,7 +4,7 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 
 import ImageCard from './ImageCard';
 
-const IMAGE_LIMIT = 2;
+const IMAGE_LIMIT = 4;
 const GET_LATEST_IMAGES_API = process.env.REACT_APP_GET_LATEST_IMAGES_API;
 
 class Home extends Component {
@@ -28,16 +28,8 @@ class Home extends Component {
     return (
       <React.Fragment>
         {this.state.loading
-          ? (
-            <Dimmer active inverted>
-              <Loader>Loading</Loader>
-            </Dimmer>
-          )
-          : (
-            <React.Fragment>
-              {this.state.images.map(image => <ImageCard labels={image.labels} imageKey={image.key} />)}
-            </React.Fragment>
-          )
+          ? <Dimmer active inverted><Loader>Loading</Loader></Dimmer>
+          : <div style={{ display: 'flex', justifyContent: 'start' }}>{this.state.images.map(image => <ImageCard labels={image.labels} imageKey={image.key} />)}</div>
         }
       </React.Fragment>
     );
