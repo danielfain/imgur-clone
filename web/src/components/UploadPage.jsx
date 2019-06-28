@@ -6,7 +6,7 @@ import crypto from 'crypto';
 const API_URL = process.env.REACT_APP_GET_PRESIGNED_URL_API;
 
 const UploadPage = (props) => {
-  const { onImageUpload } = props;
+  const { onImageUpload, setLoading } = props;
 
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles[0].type.substring(0, 5) !== 'image') {
@@ -25,6 +25,8 @@ const UploadPage = (props) => {
 
     reader.onerror = () => (console.log('error'));
     reader.onload = async () => {
+      setLoading();
+
       const imageBase64 = reader.result.split(',').pop();
       const imageBuffer = Buffer.from(imageBase64, 'base64');
 
@@ -37,7 +39,7 @@ const UploadPage = (props) => {
       if (signedUrl) {
         await axios.put(signedUrl, imageBuffer, { headers: { 'Content-Encoding': 'base64', 'Content-Type': acceptedFiles[0].type } })
           .then(() => {
-            onImageUpload(true);
+            onImageUpload(true, key);
           })
           .catch(() => {
             onImageUpload(false);
