@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import UploadPage from './UploadPage';
 
@@ -13,12 +13,13 @@ class Header extends Component {
       loading: false,
       uploadError: false,
       imageKey: null,
+      modalOpen: false,
     };
   }
 
   onImageUpload(success, imageKey) {
     if (success) {
-      this.setState({ uploadError: false, imageKey, loading: false });
+      setTimeout(() => this.setState({ uploadError: false, imageKey, loading: false, modalOpen: false }), 2000);
       return;
     }
     this.setState({ uploadError: true, loading: false });
@@ -34,7 +35,7 @@ class Header extends Component {
         <Link to="/">
           <h1>Imgur Clone</h1>
         </Link>
-        <Modal trigger={<Button>Upload</Button>} onClose={() => (this.setState({ uploadError: false }))}>
+        <Modal trigger={<Button>Upload</Button>} open={this.state.modalOpen} onOpen={() => this.setState({ modalOpen: true })} onClose={() => this.setState({ uploadError: false, modalOpen: false })}>
           <Modal.Header>Select an image</Modal.Header>
           <Modal.Content>
             {this.state.loading
@@ -45,12 +46,12 @@ class Header extends Component {
               ? <Message error><Message.Header>Error uploading image. Please try again.</Message.Header></Message>
               : null
             }
-            {this.state.imageKey
-              ? <Message success><Message.Header><a href={`/image/${this.state.imageKey}`}>Click to see your image</a></Message.Header></Message>
-              : null
-            }
           </Modal.Content>
         </Modal>
+        {this.state.imageKey
+          ? <Redirect to={`/image/${this.state.imageKey}`} />
+          : null
+        }
       </div>
     );
   }
