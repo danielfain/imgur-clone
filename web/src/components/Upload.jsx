@@ -5,7 +5,7 @@ import crypto from 'crypto';
 
 const API_URL = process.env.REACT_APP_GET_PRESIGNED_URL_API;
 
-const UploadPage = (props) => {
+const Upload = (props) => {
   const { onImageUpload, setLoading } = props;
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -67,4 +67,4 @@ const UploadPage = (props) => {
   );
 };
 
-export default UploadPage;
+export default Upload;

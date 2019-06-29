@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import { Link, Redirect } from 'react-router-dom';
 
-import UploadPage from './UploadPage';
+import Upload from './Upload';
 
 class Header extends Component {
   constructor() {
@@ -19,12 +19,14 @@ class Header extends Component {
 
   onImageUpload(success, imageKey) {
     if (success) {
+      // A delay to allow the AWS functions to finish labelling and inserting into database
       setTimeout(() => this.setState({ uploadError: false, imageKey, loading: false, modalOpen: false }), 2000);
       return;
     }
     this.setState({ uploadError: true, loading: false });
   }
 
+  // To give an accurate loading time to the modal from the Upload component
   setLoading() {
     this.setState({ loading: true });
   }
@@ -40,7 +42,7 @@ class Header extends Component {
           <Modal.Content>
             {this.state.loading
               ? <Dimmer active inverted><Loader>Loading</Loader></Dimmer>
-              : <UploadPage onImageUpload={this.onImageUpload} setLoading={this.setLoading} />
+              : <Upload onImageUpload={this.onImageUpload} setLoading={this.setLoading} />
             }
             {this.state.uploadError
               ? <Message error><Message.Header>Error uploading image. Please try again.</Message.Header></Message>
