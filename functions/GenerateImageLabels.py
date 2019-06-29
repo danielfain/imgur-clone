@@ -1,6 +1,7 @@
 import boto3
 import uuid
 import json
+import os
 
 rekognition = boto3.client("rekognition", "us-east-1")
 dynamo = boto3.resource("dynamodb", "us-east-1")
@@ -15,7 +16,7 @@ def lambda_handler(event, context):
     response = rekognition.detect_labels(
         Image = {
             "S3Object": {
-                "Bucket": "imgurclone",
+                "Bucket": os.environ["bucket"],
                 "Name": image_key,
             }
         },
@@ -28,7 +29,7 @@ def lambda_handler(event, context):
     for label in response["Labels"]:
         labels.append(label["Name"])
     
-    table = dynamo.Table("imgur_clone_images")
+    table = dynamo.Table(os.environ["dynamo_table"])
 
     table.put_item(
         Item = {

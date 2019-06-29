@@ -7,7 +7,7 @@ exports.handler = async (event) => {
     var type = event.queryStringParameters.type;
     
     var s3Params = {
-      Bucket: 'imgurclone',
+      Bucket: process.env.BUCKET,
       Key:  key,
       ContentEncoding: 'base64',
       ContentType: type,

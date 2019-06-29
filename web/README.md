@@ -1,3 +1,3 @@
-# Imgur Clone
+# Image Rekognizer
 
-The frontend component of my Imgur Clone built with React and Semantic UI
+The frontend component built with React and Semantic UI

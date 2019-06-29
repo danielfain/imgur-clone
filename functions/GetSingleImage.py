@@ -1,11 +1,12 @@
 import boto3
+import os
 import json
 from boto3.dynamodb.conditions import Key, Attr
 
 dynamodb = boto3.resource('dynamodb', 'us-east-1')
 
 def single(event, context):
-    table = dynamodb.Table('imgur_clone_images')
+    table = dynamodb.Table(os.environ['dynamo_table'])
     key = event['queryStringParameters']['key']
 
     response = table.get_item(
