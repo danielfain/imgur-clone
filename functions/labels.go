@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
@@ -13,7 +15,7 @@ import (
 // Handler handles
 func Handler(event events.S3Event) error {
 	session, _ := session.NewSession(&aws.Config{
-		Region: aws.String("us-east-1")},
+		Region: aws.String(os.Getenv("region"))},
 	)
 
 	key := event.Records[0].S3.Object.Key
@@ -23,7 +25,7 @@ func Handler(event events.S3Event) error {
 	result, err := rekognitionClient.DetectLabels(&rekognition.DetectLabelsInput{
 		Image: &rekognition.Image{
 			S3Object: &rekognition.S3Object{
-				Bucket: aws.String("imgurclone"),
+				Bucket: aws.String(os.Getenv("bucket")),
 				Name:   aws.String(key),
 			},
 		},
@@ -53,7 +55,7 @@ func Handler(event events.S3Event) error {
 			"key":    marshalledKey,
 			"labels": marshalledLabels,
 		},
-		TableName: aws.String("imgur_clone_images"),
+		TableName: aws.String(os.Getenv("table")),
 	})
 
 	if err != nil {

@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -21,32 +21,34 @@ type PresignedURL struct {
 // Handler for Lambda Function
 func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	session, err := session.NewSession(&aws.Config{
-		Region: aws.String("us-east-1")},
+		Region: aws.String(os.Getenv("region"))},
 	)
 
 	client := s3.New(session)
 
 	req, _ := client.PutObjectRequest(&s3.PutObjectInput{
-		Bucket:          aws.String("imgurclone"),
+		Bucket:          aws.String(os.Getenv("bucket")),
 		Key:             aws.String(request.QueryStringParameters["key"]),
 		ContentType:     aws.String(request.QueryStringParameters["type"]),
-		ContentEncoding: aws.String("base64"),
+		ContentEncoding: aws.String(os.Getenv("encoding")),
 		ACL:             aws.String("public-read"),
 	})
 
 	urlStr, err := req.Presign(15 * time.Minute)
 
 	if err != nil {
-		log.Println(err)
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusInternalServerError,
+			Headers:    map[string]string{"Access-Control-Allow-Origin": "*"},
+		}, err
 	}
 
-	url := PresignedURL{URL: urlStr}
-	urlJSON, _ := json.Marshal(url)
+	url, _ := json.Marshal(PresignedURL{URL: urlStr})
 
 	return events.APIGatewayProxyResponse{
 		StatusCode: http.StatusOK,
 		Headers:    map[string]string{"Access-Control-Allow-Origin": "*"},
-		Body:       string(urlJSON),
+		Body:       string(url),
 	}, nil
 
 }
