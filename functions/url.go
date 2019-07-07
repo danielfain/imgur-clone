@@ -15,7 +15,7 @@ import (
 
 // PresignedURL contains the presigned url
 type PresignedURL struct {
-	URL string `json:"url"`
+	URL string `json:"uploadURL"`
 }
 
 // Handler for Lambda Function
@@ -37,7 +37,7 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	urlStr, err := req.Presign(15 * time.Minute)
 
 	if err != nil {
-		log.Println("Failed to sign request", err)
+		log.Println(err)
 	}
 
 	url := PresignedURL{URL: urlStr}

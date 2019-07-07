@@ -37,7 +37,7 @@ const Upload = (props) => {
         });
 
       if (signedUrl) {
-        await axios.put(signedUrl, imageBuffer, { headers: { 'Content-Encoding': 'base64', 'Content-Type': acceptedFiles[0].type } })
+        await axios.put(signedUrl, imageBuffer, { headers: { 'Content-Encoding': 'base64', 'Content-Type': acceptedFiles[0].type, 'x-amz-acl': 'public-read' } })
           .then(() => {
             onImageUpload(true, key);
           })
