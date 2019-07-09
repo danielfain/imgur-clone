@@ -29,7 +29,11 @@ class Home extends Component {
       <React.Fragment>
         {this.state.loading
           ? <Dimmer active inverted><Loader>Loading</Loader></Dimmer>
-          : <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>{this.state.images.map(image => <ImageCard labels={image.labels} imageKey={image.key} />)}</div>
+          : (
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+              {this.state.images.map(image => <ImageCard labels={image.labels} imageKey={image.key} />)}
+            </div>
+          )
         }
       </React.Fragment>
     );

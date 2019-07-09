@@ -7,7 +7,7 @@ import App from './components/App';
 
 ReactDOM.render(
   <Router>
-    <div style={{ paddingLeft: '7vw', paddingRight: '7vw', paddingTop: '2vw', paddingBottom: '2vw' }}>
+    <div style={{ paddingLeft: '5vw', paddingRight: '5vw', paddingTop: '2vh', paddingBottom: '2vh' }}>
       <App />
     </div>
   </Router>,

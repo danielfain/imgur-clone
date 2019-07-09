@@ -20,7 +20,7 @@ class Header extends Component {
   onImageUpload(success, imageKey) {
     if (success) {
       // A delay to allow the AWS functions to finish labelling and inserting into database
-      setTimeout(() => this.setState({ uploadError: false, imageKey, loading: false, modalOpen: false }), 3000);
+      setTimeout(() => this.setState({ uploadError: false, imageKey, loading: false, modalOpen: false }), 2000);
       return;
     }
     this.setState({ uploadError: true, loading: false });
