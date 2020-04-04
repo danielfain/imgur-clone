@@ -35,9 +35,9 @@ class Header extends Component {
     return (
       <div style={{ paddingBottom: '2vw', display: 'flex', justifyContent: 'space-between' }}>
         <Link to="/">
-          <h1>Image Rekognizer</h1>
+          <h1 style={{ color: '#ffa7c4' }}>Image Rekognizer</h1>
         </Link>
-        <Modal trigger={<Button>Upload</Button>} open={this.state.modalOpen} onOpen={() => this.setState({ modalOpen: true })} onClose={() => this.setState({ uploadError: false, modalOpen: false })}>
+        <Modal trigger={<Button style={{ backgroundColor: '#ffa7c4' }}>Upload</Button>} open={this.state.modalOpen} onOpen={() => this.setState({ modalOpen: true })} onClose={() => this.setState({ uploadError: false, modalOpen: false })}>
           <Modal.Header>Select an image</Modal.Header>
           <Modal.Content>
             {this.state.loading

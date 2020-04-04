@@ -9,12 +9,12 @@ const ImageCard = (props) => {
   } = props;
 
   return (
-    <div style={{ paddingTop: '1vh', paddingBottom: '1vh', paddingRight: '1vw', paddingLeft: '1vw' }}>
-      <Card href={`/image/${imageKey}`} color="blue">
+    <div style={{ paddingTop: '1vh', paddingBottom: '1vh', paddingRight: '1vw', paddingLeft: '1vw', backgroundColor: '#282c35' }}>
+      <Card href={`/image/${imageKey}`} color="pink" style={{ backgroundColor: '#282c35' }}>
         <Image src={S3_URL + imageKey} />
         <Card.Content extra textAlign="center">
           {labels.map((label, index) => (
-            <Button key={index} size="mini">{label}</Button>
+            <Button key={index} size="mini" style={{ backgroundColor: '#ffa7c4' }}>{label}</Button>
           ))}
         </Card.Content>
       </Card>

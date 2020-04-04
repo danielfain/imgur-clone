@@ -40,7 +40,7 @@ class ImagePage extends Component {
               <Image src={this.state.url} size="massive" rounded />
               <div style={{ paddingTop: '1vh' }}>
                 {this.state.labels.map(label => (
-                  <Button>{label}</Button>
+                  <Button style={{ backgroundColor: '#ffa7c4' }}>{label}</Button>
                 ))}
               </div>
             </React.Fragment>
