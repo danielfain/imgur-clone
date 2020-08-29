@@ -9,7 +9,7 @@ const ImageCard = (props) => {
   } = props;
 
   return (
-    <div style={{ paddingTop: '1vh', paddingBottom: '1vh', paddingRight: '1vw', paddingLeft: '1vw', backgroundColor: '#282c35' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#282c35' }}>
       <Card href={`/image/${imageKey}`} color="pink" style={{ backgroundColor: '#282c35' }}>
         <Image src={S3_URL + imageKey} />
         <Card.Content extra textAlign="center">

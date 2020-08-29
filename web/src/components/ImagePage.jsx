@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Image, Button, Loader, Dimmer } from 'semantic-ui-react';
 import axios from 'axios';
 
+import './ImagePage.css';
+
 const S3_URL = process.env.REACT_APP_S3_URL;
 const SINGLE_API = `${process.env.REACT_APP_SINGLE_API}?key=`;
 
@@ -38,7 +40,7 @@ class ImagePage extends Component {
           : (
             <React.Fragment>
               <Image src={this.state.url} size="massive" rounded />
-              <div style={{ paddingTop: '1vh' }}>
+              <div className="image-container">
                 {this.state.labels.map(label => (
                   <Button style={{ backgroundColor: '#ffa7c4' }}>{label}</Button>
                 ))}

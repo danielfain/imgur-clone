@@ -4,6 +4,8 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 
 import ImageCard from './ImageCard';
 
+import './Home.css';
+
 const IMAGE_LIMIT = 15;
 const GET_LATEST_IMAGES_API = process.env.REACT_APP_GET_LATEST_IMAGES_API;
 
@@ -30,7 +32,7 @@ class Home extends Component {
         {this.state.loading
           ? <Dimmer active inverted><Loader>Loading</Loader></Dimmer>
           : (
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <div className="images-container">
               {this.state.images.map(image => <ImageCard labels={image.labels} imageKey={image.key} />)}
             </div>
           )

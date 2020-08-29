@@ -33,11 +33,11 @@ class Header extends Component {
 
   render() {
     return (
-      <div style={{ paddingBottom: '2vw', display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ paddingBottom: '2rem', display: 'flex', justifyContent: 'space-between' }}>
         <Link to="/">
           <h1 style={{ color: '#ffa7c4' }}>Image Rekognizer</h1>
         </Link>
-        <Modal trigger={<Button style={{ backgroundColor: '#ffa7c4' }}>Upload</Button>} open={this.state.modalOpen} onOpen={() => this.setState({ modalOpen: true })} onClose={() => this.setState({ uploadError: false, modalOpen: false })}>
+        <Modal size="tiny" trigger={<Button style={{ backgroundColor: '#ffa7c4' }}>Upload</Button>} open={this.state.modalOpen} onOpen={() => this.setState({ modalOpen: true })} onClose={() => this.setState({ uploadError: false, modalOpen: false })}>
           <Modal.Header>Select an image</Modal.Header>
           <Modal.Content>
             {this.state.loading
